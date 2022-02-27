@@ -3,6 +3,7 @@ import React, { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Button, Input,Text } from "react-native-elements";
 import { auth } from "../firebase";
+import { createUserWithEmailAndPassword,updateProfile  } from "firebase/auth"
 const RegisterScreen = (props: any) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +16,26 @@ const RegisterScreen = (props: any) => {
     })
   },[props.navigation])
   const register = () =>{
-    auth.createUserWithEmailAndPassword(email,password)
+    //auth.createUserWithEmailAndPassword(email,password)
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      updateProfile(user,{
+        displayName: name,
+        photoURL: imgUrl
+      }).then(()=>{
+        console.log('OK');
+      }).catch((error)=>{
+        console.log(error);
+      })
+      
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
   }
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
