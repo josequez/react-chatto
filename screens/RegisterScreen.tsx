@@ -23,7 +23,7 @@ const RegisterScreen = (props: any) => {
       const user = userCredential.user;
       updateProfile(user,{
         displayName: name,
-        photoURL: imgUrl
+        photoURL: imgUrl || 'https://raw.githubusercontent.com/josequez/react-chatto/main/assets/toppng.com-roger-berry-avatar-placeholder-358x358.png'
       }).then(()=>{
         console.log('OK');
       }).catch((error)=>{

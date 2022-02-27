@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import HomeScreen from "./screens/HomeScreen";
 
 const Stack = createStackNavigator();
 const globalScreenOptions = {
@@ -18,6 +19,7 @@ export default function App() {
       <Stack.Navigator screenOptions={globalScreenOptions}>
         <Stack.Screen name="Login"  component={LoginScreen} options={{headerTitleAlign:'center'}} />
         <Stack.Screen name="Register"  component={RegisterScreen} options={{headerTitleAlign:'center'}} />
+        <Stack.Screen name="Home"  component={HomeScreen} options={{headerTitleAlign:'center'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
