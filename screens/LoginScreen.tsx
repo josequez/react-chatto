@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, Image,Input } from 'react-native-elements';
 import { auth } from "../firebase";
+import { signInWithEmailAndPassword  } from "firebase/auth"
 
 const LoginScreen = (props:any) => {
   const [email,setEmail] = useState("");
@@ -17,7 +18,18 @@ const LoginScreen = (props:any) => {
     return unsubscribe;
   },[])
   const signIn = () =>{
-
+    signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    if(user){
+      props.navigation.replace("Home");
+    }
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
   }
   const signUp = () =>{
 
